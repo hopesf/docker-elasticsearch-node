@@ -1,8 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
+import router from './routes/index.ts';
 
 // Configuration
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
@@ -16,9 +17,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+app.use(router);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
