@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import router from './routes/index.ts';
+import router from './routes';
 
 // Configuration
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });

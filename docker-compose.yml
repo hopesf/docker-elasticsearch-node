@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  node01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
+    container_name: node01
+    environment:
+      - node.name=node01
+      - cluster.name=es-cluster-7
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es-data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - es-network
+
+  express-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ELASTICSEARCH_HOST=http://node01:9200
+    depends_on:
+      - node01
+    ports:
+      - "3000:3000"
+    networks:
+      - es-network
+
+volumes:
+  es-data01:
+    driver: local
+
+networks:
+  es-network:
+    driver: bridge
