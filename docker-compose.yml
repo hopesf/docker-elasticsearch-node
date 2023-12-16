@@ -17,8 +17,6 @@ services:
       - es-data01:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
-    networks:
-      - es-network
 
   express-app:
     build:
@@ -30,13 +28,7 @@ services:
       - node01
     ports:
       - "3000:3000"
-    networks:
-      - es-network
 
 volumes:
   es-data01:
     driver: local
-
-networks:
-  es-network:
-    driver: bridge

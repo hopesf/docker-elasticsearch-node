@@ -6,9 +6,8 @@ const router: Router = Router();
 
 // find users, crud
 router.get('/', controller.homePage);
-router.post('/filter', controller.filter);
-router.post('/add-product', controller.addProduct);
-// get all products
-router.get('/product', controller.getAllProducts);
+router.get('/addProduct', controller.addProduct);
+router.get('/product', controller.getProduct);
+router.get('/deleteProduct', controller.deleteProduct);
 
 export default router;
